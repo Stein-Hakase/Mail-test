@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mail-test.css">
+    <title>Document</title>
+
+</head>
+<body>
+    <form action="" method="">
+        <label for="email"></label>
+        <input class='name' type="text" name="name" id="name" placeholder="enter your full Name">
+         <input class='email' type="email" name="email" id="email" placeholder="Subscribe with your email">
+         <button type="submit" class="btn-subscribe">Subscribe</button>
+    </form>
+</body>
+<!-- getsubscriber.php -->
+<script  src="./js/bootstrap-js/jquery.js" ></script>
+ 
+<script>
+$(document).ready(function(){
+  $('form').submit(function(event){
+    event.preventDefault()
+    const data ={
+        name :event.target.name.value ,
+        email:event.target.email.value ,
+
+    }
+        var fd = new FormData();
+        //very simply, doesn't handle complete objects
+        for(var i in data){
+        fd.append(i,data[i]);
+        }
+     let addsubscribe = async () =>{
+        let post = await fetch('getsubscriber.php', {
+        method: 'POST',
+        body:fd,
+        mode:"cors",
+  });
+     }
+     addsubscribe().then(res=>{
+         console.log(res)
+     })
+  })
+
+  });
+
+</script>
+</html>
